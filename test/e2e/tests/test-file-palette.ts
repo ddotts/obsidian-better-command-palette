@@ -4,6 +4,17 @@ import {
 
 const testCase = new TestCase('Test File Palette');
 
+testCase.addTest('Command palette defaults to file search', async () => {
+    await testCase.pressKey('P', { metaKey: true });
+    await testCase.assertElCount('.suggestion-item', 20);
+
+    await testCase.typeInEl('.prompt-input', 'e2e-test-file');
+    await testCase.findEl('.suggestion-item', { text: 'e2e-test-file' });
+
+    await testCase.pressKey('Esc');
+    await testCase.assertElCount('.better-command-palette', 0);
+});
+
 testCase.addTest('Open, search, and close', async () => {
     await testCase.pressKey('O', { metaKey: true });
     await testCase.assertElCount('.suggestion-item', 20);
@@ -152,7 +163,7 @@ testCase.addTest('Search aliases (plural)', async () => {
 
 testCase.addTest('Switch new pane and file creation modifiers', async () => {
     await testCase.pressKey(',', { metaKey: true });
-    await testCase.clickEl('.vertical-tab-nav-item', { text: 'Better Command Palette' });
+    await testCase.clickEl('.vertical-tab-nav-item', { text: 'Better Command Palette ddootts' });
 
     try {
         await testCase.findEl('.setting-item:nth-child(5) .checkbox-container.is-enabled');
@@ -201,7 +212,7 @@ testCase.addTest('Create arbitrary file in new pane', async () => {
 
 testCase.addTest('Switch new pane and file creation modifiers back to default', async () => {
     await testCase.pressKey(',', { metaKey: true });
-    await testCase.clickEl('.vertical-tab-nav-item', { text: 'Better Command Palette' });
+    await testCase.clickEl('.vertical-tab-nav-item', { text: 'Better Command Palette ddootts' });
 
     try {
         await testCase.findEl('.setting-item:nth-child(5) .checkbox-container:not(.is-enabled)');

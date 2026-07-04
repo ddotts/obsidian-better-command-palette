@@ -19,11 +19,14 @@ export default class BetterCommandPaletteCommandAdapter extends SuggestModalAdap
 
     pinnedItems: Match[];
 
+    commandSearchPrefix: string;
+
     initialize() {
         super.initialize();
 
-        this.titleText = 'Better Command Palette: Commands';
+        this.titleText = 'Better Command Palette ddootts: Commands';
         this.emptyStateText = 'No matching commands.';
+        this.commandSearchPrefix = this.plugin.settings.commandSearchPrefix;
 
         this.hiddenIds = this.plugin.settings.hiddenCommands;
         this.hiddenIdsSettingsKey = 'hiddenCommands';
@@ -61,6 +64,10 @@ export default class BetterCommandPaletteCommandAdapter extends SuggestModalAdap
             { command: generateHotKeyText({ modifiers: ['Mod'], key: this.plugin.settings.fileSearchHotkey }, this.plugin.settings), purpose: 'Search Files' },
             { command: generateHotKeyText({ modifiers: ['Mod'], key: this.plugin.settings.tagSearchHotkey }, this.plugin.settings), purpose: 'Search Tags' },
         ];
+    }
+
+    cleanQuery(query: string): string {
+        return query.replace(this.commandSearchPrefix, '');
     }
 
     renderSuggestion(match: Match, content: HTMLElement, aux: HTMLElement): void {

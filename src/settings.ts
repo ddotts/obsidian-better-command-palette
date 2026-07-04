@@ -8,6 +8,7 @@ import { SettingsCommandSuggestModal } from './utils';
 export interface BetterCommandPalettePluginSettings {
     closeWithBackspace: boolean,
     showPluginName: boolean,
+    commandSearchPrefix: string,
     fileSearchPrefix: string,
     tagSearchPrefix: string,
     commandSearchHotkey: string,
@@ -32,7 +33,8 @@ export interface BetterCommandPalettePluginSettings {
 export const DEFAULT_SETTINGS: BetterCommandPalettePluginSettings = {
     closeWithBackspace: true,
     showPluginName: true,
-    fileSearchPrefix: '/',
+    commandSearchPrefix: '>',
+    fileSearchPrefix: '',
     tagSearchPrefix: '#',
     commandSearchHotkey: 'p',
     fileSearchHotkey: 'o',
@@ -75,7 +77,7 @@ export class BetterCommandPaletteSettingTab extends PluginSettingTab {
 
         containerEl.empty();
 
-        containerEl.createEl('h2', { text: 'Better Command Palette Settings' });
+        containerEl.createEl('h2', { text: 'Better Command Palette ddootts Settings' });
         new Setting(containerEl)
             .setName('Close on Backspace')
             .setDesc('Close the palette when there is no text and backspace is pressed')
@@ -152,8 +154,16 @@ export class BetterCommandPaletteSettingTab extends PluginSettingTab {
             }));
 
         new Setting(containerEl)
+            .setName('Command Search Prefix')
+            .setDesc('The prefix used to tell the palette you want to search commands')
+            .addText((t) => t.setValue(settings.commandSearchPrefix).onChange(async (val) => {
+                settings.commandSearchPrefix = val;
+                await this.plugin.saveSettings();
+            }));
+
+        new Setting(containerEl)
             .setName('File Search Prefix')
-            .setDesc('The prefix used to tell the palette you want to search files')
+            .setDesc('The prefix used to tell the palette you want to search files. Leave blank to search files by default.')
             .addText((t) => t.setValue(settings.fileSearchPrefix).onChange(async (val) => {
                 settings.fileSearchPrefix = val;
                 await this.plugin.saveSettings();

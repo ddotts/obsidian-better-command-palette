@@ -32,7 +32,7 @@ export const SPECIAL_KEYS: Record<string, string> = {
     ESC: 'Esc',
 };
 
-export const MACRO_COMMAND_ID_PREFIX = 'obsidian-better-command-palette-macro-';
+export const MACRO_COMMAND_ID_PREFIX = 'obsidian-better-command-palette-ddootts-macro-';
 
 export enum ActionType {
     Commands,

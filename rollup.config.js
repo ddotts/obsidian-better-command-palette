@@ -11,7 +11,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const isLocal = process.env.DEST === 'local';
 const includeTestFiles = process.env.TYPE === 'test';
 
-let outputLocation = './test-vault/.obsidian/plugins/obsidian-better-command-palette';
+let outputLocation = './test-vault/.obsidian/plugins/obsidian-better-command-palette-ddootts';
 
 if (isProduction) {
     outputLocation = './dist';

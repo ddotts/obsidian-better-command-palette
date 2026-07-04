@@ -9,7 +9,7 @@ testCase.addTest('Open, search, and close', async () => {
     await testCase.pressKey('P', { metaKey: true });
     await testCase.assertElCount('.suggestion-item', 20);
 
-    await testCase.typeInEl('.prompt-input', 'Toggle pin');
+    await testCase.typeInEl('.prompt-input', '>Toggle pin');
     await testCase.findEl('.suggestion-item', { text: 'Toggle pin' });
 
     await testCase.pressKey('Esc');
@@ -27,7 +27,7 @@ testCase.addTest('Close with backspace', async () => {
 // Test recent commands
 testCase.addTest('Recent command bubbling', async () => {
     await testCase.pressKey('P', { metaKey: true });
-    await testCase.typeInEl('.prompt-input', 'Toggle pin');
+    await testCase.typeInEl('.prompt-input', '>Toggle pin');
     await testCase.clickEl('.suggestion-item', { text: 'Toggle pin' });
     await testCase.pressKey('Enter');
 
@@ -38,14 +38,14 @@ testCase.addTest('Recent command bubbling', async () => {
 
 testCase.addTest('Command fuzzy search', async () => {
     await testCase.pressKey('P', { metaKey: true });
-    await testCase.typeInEl('.prompt-input', 'Toggle');
+    await testCase.typeInEl('.prompt-input', '>Toggle');
     await testCase.assertElCount('.suggestion-item', 19);
     await testCase.pressKey('Esc');
 });
 
 testCase.addTest('Command hotkeys', async () => {
     await testCase.pressKey('P', { metaKey: true });
-    await testCase.typeInEl('.prompt-input', 'Toggle pin');
+    await testCase.typeInEl('.prompt-input', '>Toggle pin');
     await testCase.findEl('.suggestion-item', { text: '⌥ ^ ⌘ I' });
     await testCase.pressKey('Esc');
 });
@@ -58,7 +58,7 @@ testCase.addTest('Empty Hidden Command Header', async () => {
 
 testCase.addTest('Hide Command', async () => {
     await testCase.pressKey('P', { metaKey: true });
-    await testCase.typeInEl('.prompt-input', 'Tag Search');
+    await testCase.typeInEl('.prompt-input', '>Tag Search');
     await testCase.clickEl('.suggestion-flair');
 
     await testCase.assertElCount('.hidden-items-header', 1, { text: 'Show hidden items (1)' });
@@ -68,7 +68,7 @@ testCase.addTest('Hide Command', async () => {
 
 testCase.addTest('Show/Hide Hidden Command', async () => {
     await testCase.pressKey('P', { metaKey: true });
-    await testCase.typeInEl('.prompt-input', 'Tag Search');
+    await testCase.typeInEl('.prompt-input', '>Tag Search');
 
     await testCase.assertElCount('.hidden-items-header', 1, { text: 'Show hidden items (1)' });
     await testCase.assertElCount('.suggestion-item', 0);
@@ -84,7 +84,7 @@ testCase.addTest('Show/Hide Hidden Command', async () => {
 
 testCase.addTest('Unhide Command', async () => {
     await testCase.pressKey('P', { metaKey: true });
-    await testCase.typeInEl('.prompt-input', 'Tag Search');
+    await testCase.typeInEl('.prompt-input', '>Tag Search');
     await testCase.clickEl('.hidden-items-header');
     await testCase.clickEl('.suggestion-flair');
 

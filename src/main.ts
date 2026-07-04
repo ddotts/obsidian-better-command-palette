@@ -21,7 +21,7 @@ export default class BetterCommandPalettePlugin extends Plugin {
 
     async onload() {
         // eslint-disable-next-line no-console
-        console.log('Loading plugin: Better Command Palette');
+        console.log('Loading plugin: Better Command Palette ddootts');
 
         await this.loadSettings();
 
@@ -31,7 +31,7 @@ export default class BetterCommandPalettePlugin extends Plugin {
 
         this.addCommand({
             id: 'open-better-commmand-palette',
-            name: 'Open better command palette',
+            name: 'Open Better Command Palette ddootts',
             // Generally I would not set a hotkey, but since it is a
             // command palette I think it makes sense
             // Can still be overwritten in the hotkey settings
@@ -49,7 +49,7 @@ export default class BetterCommandPalettePlugin extends Plugin {
 
         this.addCommand({
             id: 'open-better-commmand-palette-file-search',
-            name: 'Open better command palette: File Search',
+            name: 'Open Better Command Palette ddootts: File Search',
             hotkeys: [],
             callback: () => {
                 new BetterCommandPaletteModal(
@@ -65,7 +65,7 @@ export default class BetterCommandPalettePlugin extends Plugin {
 
         this.addCommand({
             id: 'open-better-commmand-palette-tag-search',
-            name: 'Open better command palette: Tag Search',
+            name: 'Open Better Command Palette ddootts: Tag Search',
             hotkeys: [],
             callback: () => {
                 new BetterCommandPaletteModal(
@@ -124,7 +124,13 @@ export default class BetterCommandPalettePlugin extends Plugin {
     }
 
     async loadSettings() {
-        this.settings = { ...DEFAULT_SETTINGS, ...await this.loadData() };
+        const loadedSettings = await this.loadData();
+        this.settings = { ...DEFAULT_SETTINGS, ...loadedSettings };
+
+        if (!loadedSettings?.commandSearchPrefix && loadedSettings?.fileSearchPrefix === '/') {
+            this.settings.fileSearchPrefix = DEFAULT_SETTINGS.fileSearchPrefix;
+        }
+
         this.loadMacroCommands();
     }
 

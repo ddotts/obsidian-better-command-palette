@@ -22,6 +22,8 @@ class BetterCommandPaletteModal extends SuggestModal<Match> implements UnsafeSug
 
     actionType: ActionType;
 
+    commandSearchPrefix: string;
+
     fileSearchPrefix: string;
 
     tagSearchPrefix: string;
@@ -61,6 +63,7 @@ class BetterCommandPaletteModal extends SuggestModal<Match> implements UnsafeSug
         super(app);
 
         // General instance variables
+        this.commandSearchPrefix = plugin.settings.commandSearchPrefix;
         this.fileSearchPrefix = plugin.settings.fileSearchPrefix;
         this.tagSearchPrefix = plugin.settings.tagSearchPrefix;
         this.suggestionLimit = plugin.settings.suggestionLimit;
@@ -70,8 +73,7 @@ class BetterCommandPaletteModal extends SuggestModal<Match> implements UnsafeSug
 
         this.modalEl.addClass('better-command-palette');
 
-        // The only time the input will be empty will be when we are searching commands
-        this.setPlaceholder('Select a command');
+        this.setPlaceholder('Select a file');
 
         // Set up all of our different adapters
         this.commandAdapter = new BetterCommandPaletteCommandAdapter(
@@ -193,11 +195,12 @@ class BetterCommandPaletteModal extends SuggestModal<Match> implements UnsafeSug
 
     changeActionType (actionType: ActionType) {
         let prefix = '';
-        if (actionType === ActionType.Files) {
+        if (actionType === ActionType.Commands) {
+            prefix = this.plugin.settings.commandSearchPrefix;
+        } else if (actionType === ActionType.Files) {
             prefix = this.plugin.settings.fileSearchPrefix;
         } else if (actionType === ActionType.Tags) {
             prefix = this.plugin.settings.tagSearchPrefix;
-
         }
         const currentQuery: string = this.inputEl.value;
         const cleanQuery = this.currentAdapter.cleanQuery(currentQuery);
@@ -224,18 +227,18 @@ class BetterCommandPaletteModal extends SuggestModal<Match> implements UnsafeSug
         let nextAdapter;
         let type;
 
-        if (text.startsWith(this.fileSearchPrefix)) {
-            type = ActionType.Files;
-            nextAdapter = this.fileAdapter;
-            this.modalEl.setAttribute("palette-mode", "files");
+        if (this.commandSearchPrefix && text.startsWith(this.commandSearchPrefix)) {
+            type = ActionType.Commands;
+            nextAdapter = this.commandAdapter;
+            this.modalEl.setAttribute('palette-mode', 'commands');
         } else if (text.startsWith(this.tagSearchPrefix)) {
             type = ActionType.Tags;
             nextAdapter = this.tagAdapter;
-            this.modalEl.setAttribute("palette-mode", "tags");
+            this.modalEl.setAttribute('palette-mode', 'tags');
         } else {
-            type = ActionType.Commands;
-            nextAdapter = this.commandAdapter;
-            this.modalEl.setAttribute("palette-mode", "commands");
+            type = ActionType.Files;
+            nextAdapter = this.fileAdapter;
+            this.modalEl.setAttribute('palette-mode', 'files');
         }
 
         if (type !== this.actionType) {

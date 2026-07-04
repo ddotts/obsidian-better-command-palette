@@ -29,7 +29,7 @@ export default class BetterCommandPaletteFileAdapter extends SuggestModalAdapter
     initialize () {
         super.initialize();
 
-        this.titleText = 'Better Command Palette: Files';
+        this.titleText = 'Better Command Palette ddootts: Files';
         this.emptyStateText = 'No matching files.';
         this.fileSearchPrefix = this.plugin.settings.fileSearchPrefix;
 

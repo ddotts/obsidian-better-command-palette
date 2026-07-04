@@ -1,9 +1,12 @@
 {
-	"name": "obsidian-better-command-palette",
+	"name": "obsidian-better-command-palette-ddootts",
 	"version": "0.17.1",
-	"description": "A command palette that does all of the things you want it to do.",
+	"description": "A personal fork of Better Command Palette for Obsidian.",
 	"main": "main.js",
 	"type": "module",
+	"engines": {
+		"node": ">=22"
+	},
 	"scripts": {
 		"dev": "rollup --config rollup.config.js -w",
 		"build": "NODE_ENV=production rollup --config rollup.config.js",

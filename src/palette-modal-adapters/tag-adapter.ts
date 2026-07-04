@@ -26,7 +26,7 @@ export default class BetterCommandPaletteTagAdapter extends SuggestModalAdapter 
         this.hiddenIdsSettingsKey = 'hiddenTags';
 
         this.tagSearchPrefix = this.plugin.settings.tagSearchPrefix;
-        this.titleText = 'Better Command Palette: Tags';
+        this.titleText = 'Better Command Palette ddootts: Tags';
         this.emptyStateText = 'No matching tags.';
 
         this.allItems = Object.entries(this.app.metadataCache.getTags())
@@ -69,6 +69,9 @@ export default class BetterCommandPaletteTagAdapter extends SuggestModalAdapter 
     async onChooseSuggestion(match: Match) {
         this.getPrevItems().add(match);
         this.palette.open();
-        this.palette.setQuery(`${this.plugin.settings.fileSearchPrefix}${QUERY_TAG}${match.text}`, 1);
+        this.palette.setQuery(
+            `${this.plugin.settings.fileSearchPrefix}${QUERY_TAG}${match.text}`,
+            this.plugin.settings.fileSearchPrefix.length + 1,
+        );
     }
 }
