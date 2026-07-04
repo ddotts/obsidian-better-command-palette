@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-better-command-palette-ddootts",
-	"version": "0.17.1",
+	"version": "0.17.2",
 	"description": "A personal fork of Better Command Palette for Obsidian.",
 	"main": "main.js",
 	"type": "module",

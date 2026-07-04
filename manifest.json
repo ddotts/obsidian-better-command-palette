@@ -1,7 +1,7 @@
 {
 	"id": "obsidian-better-command-palette-ddootts",
 	"name": "Better Command Palette ddootts",
-	"version": "0.17.1",
+	"version": "0.17.2",
 	"minAppVersion": "0.12.0",
 	"description": "A personal fork of Better Command Palette for Obsidian.",
 	"author": "Alex Bieg",
